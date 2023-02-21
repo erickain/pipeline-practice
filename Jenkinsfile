@@ -7,6 +7,7 @@ pipeline {
                 sh '''
                 ls 
                 pwd
+                free
                 '''
             }
         }
