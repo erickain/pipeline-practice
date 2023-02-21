@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+                label ("Node2")
+            }
     stages {
         stage('Clone') {
             steps {
