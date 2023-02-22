@@ -1,33 +1,14 @@
 pipeline {
-    agent {
-                label ("Node3")
-            }
+    agent any
+  environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
     stages {
-        stage('Clone') {
+        stage('Hello') {
             steps {
                 sh '''
                 ls 
-                echo "Clone"
                 pwd
-                '''
-            }
-        }
-        stage('Build') {
-            steps {
-                sh '''
-                ls 
-                echo "Build"
-                pwd
-                '''
-            }
-        }
-        stage('Release') {
-            steps {
-                sh '''
-                ls 
-                echo "Release"
-                pwd
-                free
                 '''
             }
         }
