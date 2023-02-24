@@ -1,20 +1,29 @@
 pipeline {    
 	agent any
     stages {
-        stage('Hello') {
+        stage('Test') {
             steps {
                 sh '''
                 ls
-		echo "Hello"
+		echo "Test"
                 pwd
 		'''
             }
         }
-	stage('Hello2') {
+	stage('Pre-Prod') {
 	   steps {
 		sh '''
 		ls
-		echo "Hello2"
+		echo "Pre-Prod"
+		pwd
+		'''
+	    }
+	}
+	stage('Prod') {
+	   steps {
+		sh '''
+		ls
+		echo "Prod"
 		pwd
 		'''
 	    }
