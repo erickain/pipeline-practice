@@ -13,6 +13,14 @@ pipeline {
 		'''
             }
         }
+	stage('Hello2') {
+	   steps {
+		sh '''
+		ls
+		echo "Hello2"
+		pwd
+		'''
+	    }
+	}
     }
-
 }
