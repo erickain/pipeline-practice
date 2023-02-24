@@ -11,8 +11,9 @@ pipeline {
                 sh '''
                 ls 
                 pwd
-                '''
+		'''
             }
         }
     }
+
 }
