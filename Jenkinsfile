@@ -5,7 +5,9 @@ pipeline {
     timeout (time: 60, unit: 'MINUTES')
     timestamps()
   	}	    
-	agent any
+	agent {
+        label ("Node1 || Node2 || Node3 || Node4")
+    }
 
     stages {
         stage('Hello') {
