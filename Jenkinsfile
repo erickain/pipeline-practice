@@ -50,7 +50,7 @@ pipeline {
 								trim: true
 							),
 							string(
-								defaultValue: 'eric-001',
+								defaultValue: 'eric-002',
 								name: 'AUTH-tag',
 								description: 'Required to enter the image tag',
 								trim: true
