@@ -1,32 +1,15 @@
-pipeline {    
+pipeline {
+	    
 	agent any
+
     stages {
-        stage('Test') {
+        stage('Hello') {
             steps {
                 sh '''
-                ls
-		echo "Test"
+                ls 
                 pwd
-		'''
+                '''
             }
         }
-	stage('Pre-Prod') {
-	   steps {
-		sh '''
-		ls
-		echo "Pre-Prod"
-		pwd
-		'''
-	    }
-	}
-	stage('Prod') {
-	   steps {
-		sh '''
-		ls
-		echo "Prod"
-		pwd
-		'''
-	    }
-	}
     }
 }
