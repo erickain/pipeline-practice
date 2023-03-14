@@ -10,15 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('Hello') {
-            steps {
-                sh '''
-                ls 
-				uname -r
-                pwd
-                '''
-            }
-        }
 
 		stage('Setup parameters') {
             steps {
@@ -65,6 +56,15 @@ pipeline {
                     	])
                 	])
                 }
+            }
+        }
+		stage('Hello') {
+            steps {
+                sh '''
+                ls 
+				uname -r
+                pwd
+                '''
             }
         }
     }
