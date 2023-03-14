@@ -19,7 +19,7 @@ pipeline {
                     properties([
                         parameters([                        
 							choice(
-								choices: ['Dev', 'Dandbox', 'Prod'], 
+								choices: ['Dev', '	Sandbox', 'Prod'], 
 								name: 'Environment'                                 
 							),
 
@@ -60,16 +60,71 @@ pipeline {
                 }
             }
         }
-		stage('Hello') {
+		stage('permission') {
             steps {
-                sh '''
-                ls
-		uname -r
-		ls
-                pwd
-                '''
+                
             }
         }
+		stage('cleaning') {
+            steps {
+                
+            }
+        }
+		stage('sonarqube') {
+            steps {
+                
+            }
+        }
+		stage('build-dev') {
+            steps {
+                
+            }
+        }
+		stage('build-sanbox') {
+            steps {
+                
+            }
+        }
+		stage('build-prod') {
+            steps {
+                
+            }
+        }
+		stage('login') {
+            steps {
+                
+            }
+        }
+		stage('push-to-dockerhub-dev') {
+            steps {
+                
+            }
+        }
+		stage('push-to-dockerhub-sanbox') {
+            steps {
+                
+            }
+        }
+		stage('push-to-dockerhub-prod') {
+            steps {
+                
+            }
+        }
+		stage('update helm charts-sanbox') {
+            steps {
+                
+            }
+        }
+		stage('update helm charts-dev') {
+            steps {
+                
+            }
+        }
+		stage('wait for argocd') {
+            steps {
+                
+            }
+        }		
     }
 	post {
    
