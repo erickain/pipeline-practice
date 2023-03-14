@@ -63,8 +63,8 @@ pipeline {
 		stage('Hello') {
             steps {
                 sh '''
-                ls 
-				uname -r
+                ls -lh 
+		uname -r
                 pwd
                 '''
             }
