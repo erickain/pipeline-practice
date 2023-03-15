@@ -25,7 +25,7 @@ pipeline {
 
 							string(
 								defaultValue: 's4user',
-								name: 'User',
+								name: 'USER',
 								description: 'Required to enter your name',
 								trim: true
 							),
@@ -63,11 +63,11 @@ pipeline {
 		stage('permission') {
             steps {
 				sh '''
-                    echo $User
+                    echo $USER
                     echo $Environment
                     cat <<EOF > check.sh
                         #! /bin/bash
-                        USER=${User}
+                        USER=${USER}
                         cat permissions.txt | grep -i $USER
                         if [[ $? -eq 0 ]]; then
                             echo "You have permission to run this job"
