@@ -63,6 +63,8 @@ pipeline {
 		stage('permission') {
             steps {
 				sh '''
+                    echo $User
+                    echo $Environment
                     cat <<EOF > check.sh
                         #! /bin/bash
                         USER=${User}
