@@ -73,7 +73,7 @@ pipeline {
                             exit 1
                         fi
                     EOF
-                    bash check.sh
+                    bash -x check.sh
                 '''
             }
         }
