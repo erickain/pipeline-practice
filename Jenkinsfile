@@ -67,7 +67,7 @@ pipeline {
                     echo $Environment
                     cat <<EOF > check.sh
                         #! /bin/bash
-                        cat permissions.txt | grep -i $USER
+                        cat permissions.txt | grep -o $USER
                         if [[ $? -eq 0 ]]
                         then
                             echo "You have permission to run this job"
