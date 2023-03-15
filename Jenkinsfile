@@ -64,6 +64,7 @@ pipeline {
             steps {
 				sh '''
                     cat <<EOF > check.sh
+                        #! /bin/bash
                         USER=${User}
                         cat permissions.txt | grep -i $USER
                         if [[ $? -eq 0 ]]; then
