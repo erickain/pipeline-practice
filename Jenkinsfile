@@ -63,8 +63,20 @@ pipeline {
 		stage('permission') {
             steps {
 				sh '''                   
+                    //cat permissions.txt | grep -o $USER
+                    //echo $?
+                    cat <<EOF > check.sh
+                    #! /bin/bash
                     cat permissions.txt | grep -o $USER
-                    echo $?
+                    if [[ $? -eq 0 ]]
+                    then
+                    echo "You have permission to run this job"
+                    else
+                    echo "You do not have permission to run this job"
+                    exit 1
+                    fi
+                    EOF
+                    bash -x ./check.sh
                 '''
             }
         }
