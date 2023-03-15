@@ -76,6 +76,7 @@ pipeline {
                             exit 1
                         fi
                     EOF
+                    chmod +x check.sh
                     bash -x check.sh
                 '''
             }
