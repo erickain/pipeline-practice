@@ -63,7 +63,7 @@ pipeline {
 		stage('permission') {
             steps {
 				sh '''                   
-                    cat <<EOF > check.sh
+                    cat << EOF > check.sh
                     #! /bin/bash
                     cat permissions.txt | grep -o $USER
                     if [[ $? -eq 0 ]]
