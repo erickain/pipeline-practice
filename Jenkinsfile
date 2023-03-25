@@ -3,7 +3,9 @@ pipeline {
 	agent {
         label ("node1 || node2 ||  node3 || node4 ||  node5 ||  branch ||  main ||  jenkins-node || docker-agent ||  jenkins-docker2 ||  preproduction ||  production")
     }
-
+   environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
 	options {
 		buildDiscarder(logRotator(numToKeepStr: '2'))
 		disableConcurrentBuilds()
@@ -101,12 +103,89 @@ pipeline {
             }
             steps {
 				sh '''
+                cd UI
+                docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}-$UITag .
+                cd -
+                cd DB
+                docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+                cd -
+                cd auth 
+                docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+                cd -
+                cd weather 
+                docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+                cd 
+                '''
+            }
+        }
+		stage('build-sanbox') {
+            when{ 
+                expression {
+                env.Environment == 'SANDBOX' 
+                }
+            }
+            steps {
+				sh '''
+                cd UI
+                docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}-$UITag .
+                cd -
+                cd DB
+                docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+                cd -
+                cd auth 
+                docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+                cd -
+                cd weather 
+                docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+                cd 
+                '''
+            }
+        }
+		stage('build-prod') {
+            when{ 
+                expression {
+                env.Environment == 'PROD' 
+                }
+            }
+            steps {
+				sh '''
+                cd UI
+                docker build -t devopseasylearning2021/s4-ui:${BUILD_NUMBER}-$UITag .
+                cd -
+                cd DB
+                docker build -t devopseasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+                cd -
+                cd auth 
+                docker build -t devopseasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+                cd -
+                cd weather 
+                docker build -t devopseasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+                cd 
+                '''
+            }
+        }
+		stage('login') {
+            steps {
+				sh '''
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                pwd
+                '''
+            }
+        }
+		stage('push-to-dockerhub-dev') {
+            when{ 
+                expression {
+                env.Environment == 'DEV' 
+                }
+            }
+            steps {
+				sh '''
                 ls 
                 pwd
                 '''
             }
         }
-		stage('build-sanbox') {
+		stage('push-to-dockerhub-sanbox') {
             when{ 
                 expression {
                 env.Environment == 'SANDBOX' 
@@ -119,44 +198,12 @@ pipeline {
                 '''
             }
         }
-		stage('build-prod') {
+		stage('push-to-dockerhub-prod') {
             when{ 
                 expression {
                 env.Environment == 'PROD' 
                 }
             }
-            steps {
-				sh '''
-                ls 
-                pwd
-                '''
-            }
-        }
-		stage('login') {
-            steps {
-				sh '''
-                ls 
-                pwd
-                '''
-            }
-        }
-		stage('push-to-dockerhub-dev') {
-            steps {
-				sh '''
-                ls 
-                pwd
-                '''
-            }
-        }
-		stage('push-to-dockerhub-sanbox') {
-            steps {
-				sh '''
-                ls 
-                pwd
-                '''
-            }
-        }
-		stage('push-to-dockerhub-prod') {
             steps {
 				sh '''
                 ls 
