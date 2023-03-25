@@ -19,7 +19,7 @@ pipeline {
                     properties([
                         parameters([                        
 							choice(
-								choices: ['DEV', '	SANDBOX', 'PROD'], 
+								choices: ['DEV', 'SANDBOX', 'PROD'], 
 								name: 'Environment'                                 
 							),
 
@@ -89,7 +89,7 @@ pipeline {
             }
             steps{
                 withSonarQubeEnv('Sonar') {
-                    sh "${scannerHome}/bin/sonar-scanner"
+                   // sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
