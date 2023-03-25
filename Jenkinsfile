@@ -19,7 +19,7 @@ pipeline {
                     properties([
                         parameters([                        
 							choice(
-								choices: ['Dev', '	Sandbox', 'Prod'], 
+								choices: ['DEV', '	SANDBOX', 'PROD'], 
 								name: 'Environment'                                 
 							),
 
@@ -94,6 +94,11 @@ pipeline {
             }
         }
 		stage('build-dev') {
+            when{ 
+                expression {
+                env.Environment == 'DEV' 
+                }
+            }
             steps {
 				sh '''
                 ls 
@@ -102,6 +107,11 @@ pipeline {
             }
         }
 		stage('build-sanbox') {
+            when{ 
+                expression {
+                env.Environment == 'SANDBOX' 
+                }
+            }
             steps {
 				sh '''
                 ls 
@@ -110,6 +120,11 @@ pipeline {
             }
         }
 		stage('build-prod') {
+            when{ 
+                expression {
+                env.Environment == 'PROD' 
+                }
+            }
             steps {
 				sh '''
                 ls 
