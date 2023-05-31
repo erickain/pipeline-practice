@@ -70,7 +70,7 @@ pipeline {
                     cat permissions.txt | grep -o $USER
                     if [[ $? -eq 0 ]]
                     then
-                        echo "You have permission to run this job"
+                        echo "You have  permission to run this job"
                     else
                         echo "You do not have permission to run this job"
                         exit 1
@@ -195,4 +195,5 @@ pipeline {
 			deleteDir()
 		}
 	}
+
 }
